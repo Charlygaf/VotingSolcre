@@ -25,6 +25,7 @@ export async function POST(req: Request) {
     path: '/',
     maxAge: 60 * 60 * 24, // 1 día
   });
+  
 
   return response;
 }

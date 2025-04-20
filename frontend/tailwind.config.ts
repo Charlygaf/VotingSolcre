@@ -1,15 +1,19 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-    content: [
-      "./app/**/*.{ts,tsx}",
-      "./pages/**/*.{ts,tsx}",
-      "./components/**/*.{ts,tsx}",
-    ],
-    theme: {
-      extend: {},
+// tailwind.config.ts
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-open-sans)', 'sans-serif'],
+      },
     },
-    plugins: [],
-  };
-export {};
-// This file is used to configure Tailwind CSS for the project.
-  
+  },
+  plugins: [],
+};
+
+export default config;

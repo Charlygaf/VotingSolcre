@@ -1,11 +1,7 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import {
   Table,
   TableHeader,
@@ -13,40 +9,54 @@ import {
   TableRow,
   TableHead,
   TableCell,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
+import { AxiosError } from "axios";
+import { toast } from "sonner";
 
 interface Result {
   name: string;
   votes: number;
 }
 
-export default function AdminPanelPage() {
-  const [results, setResults] = useState<Result[]>([]);
-  const [error, setError] = useState('');
-  const router = useRouter();
+export default async function AdminPanelPage() {
+  const cookieStore = cookies();
+  const token = (await cookieStore).get("admin-token")?.value;
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      router.push('/admin/login');
-      return;
+  if (!token) {
+    redirect("/admin/login");
+  }
+
+  let results: Result[] = [];
+  const error = "";
+
+  try {
+    const res = await fetch("http://localhost:4000/results", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store", // para evitar cache si usás SSR
+    });
+
+    if (!res.ok) {
+      throw new Error("Falló la carga");
     }
 
-    axios
-      .get('http://localhost:4000/results', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setResults(res.data);
-      })
-      .catch((err) => {
-        if (err.response?.status === 401) {
-          router.push('/admin/login');
-        } else {
-          setError('Error al cargar los resultados');
+    results = await res.json();
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      const errorMessage = (() => {
+        try {
+          const parsed = JSON.parse(error.request.response);
+          return parsed.message || "Error desconocido";
+          toast.error(parsed.message || "Error desconocido");
+        } catch {
+          return "Error desconocido";
         }
-      });
-  }, [router]);
+      })();
+      error = errorMessage;
+    }
+    error = "Error al cargar los resultados";
+  }
 
   return (
     <div className="flex justify-center mt-20 px-4">

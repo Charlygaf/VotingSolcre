@@ -10,15 +10,12 @@ import {
   Response as ExpressResponse,
 } from "express";
 
-// log incoming requests
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use((req: ExpressRequest, res: ExpressResponse, next: Function) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
+
 
 app.get("/", (req: ExpressRequest, res: ExpressResponse) => {
   res.send("Voting System Backend is running");

@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
+const verifyAdminToken = require("../middleware/auth");
 const prisma = new PrismaClient();
 
-router.get("/", async (req, res) => {
+router.get("/", verifyAdminToken, async (req, res) => {
   const votes = await prisma.vote.findMany({
     include: { candidate: true },
   });

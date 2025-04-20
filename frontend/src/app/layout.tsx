@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {Open_Sans} from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import { Toaster } from "@/components/ui/sonner"
+ 
+const openSans = Open_Sans({
   subsets: ["latin"],
+  variable: "--font-open-sans",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,10 +24,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${openSans.variable} antialiased   `}
       >
-        <Navbar/>
-        {children}
+        <div className="h-full min-h-lvh bg-gradient-to-t pb-0  flex flex-col justify-between from-sky-200 from-20% to-gray-100 to-40%">
+          <Navbar />
+          {children}
+          <div>
+            <footer className="flex md:text-base text-xs justify-between px-10 items-center h-20 bg-sky-200 shadow-md mt-10">
+          
+              <p className="text-gray-600 ml-2">
+                Desarrollado por Solcre.
+              </p>
+              <p className="text-gray-600 ml-2 ">Carlos Garcia Arocena</p>
+            </footer>
+          </div>
+        </div>
+        <Toaster />
       </body>
     </html>
   );
