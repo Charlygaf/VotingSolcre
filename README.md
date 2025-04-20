@@ -5,6 +5,7 @@ Voting app
 # Estructura
 
 /mi-app
+
 /frontend (Next.js)
 
 /backend (Express)
