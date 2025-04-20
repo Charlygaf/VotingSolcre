@@ -9,6 +9,7 @@ Voting app
 /frontend (Next.js)
 
 /backend (Express)
+
 README.md
 
 # 🗳️ Voting App
