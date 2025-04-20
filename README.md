@@ -1,19 +1,20 @@
 # VotingSolcre
+
 Voting app
 
+# Estructura
 
 /mi-app
-  /frontend   (Next.js)
-  /backend    (Express)
-  README.md
+/frontend (Next.js)
 
+/backend (Express)
+README.md
 
-  # 🗳️ Voting App
+# 🗳️ Voting App
 
 Aplicación web para votación online con panel de administración.
 
 ## 📁 Estructura del proyecto
-
 
 ---
 
@@ -22,7 +23,7 @@ Aplicación web para votación online con panel de administración.
 - Node.js >= 18
 - npm
 - PostgreSQL (u otro motor de base de datos compatible con Prisma)
-- Ambos .env fueron incluidos en el repo para facilitar 
+- Ambos .env fueron incluidos en el repo para facilitar
 
 ---
 
@@ -42,14 +43,14 @@ cp .env.example .env
 
 npm install
 npx prisma migrate dev
-npx prisma migrate reset # opcional, si tenés un seed para admins y votantes
+npx prisma migrate reset # corre el seed
 npm run dev
 
 
 ### Frontend
 cd ../frontend
 cp .env.local.example .env.local
-# Editar las variables de entorno si es necesario (ej. API_URL)
+# Editar las variables de entorno si es necesario 
 
 npm install
 npm run build #build next
@@ -61,3 +62,4 @@ npm run dev
 ## Acceso como admin
 Email: admin@email.com
 Password: 1234
+```
