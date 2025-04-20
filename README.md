@@ -2,7 +2,12 @@
 
 Voting app
 
-# Estructura
+
+# 🗳️ Voting App
+
+Aplicación web para votación online con panel de administración.
+
+## 📁 Estructura del proyecto
 
 /mi-app
 
@@ -11,13 +16,6 @@ Voting app
 /backend (Express)
 
 README.md
-
-# 🗳️ Voting App
-
-Aplicación web para votación online con panel de administración.
-
-## 📁 Estructura del proyecto
-
 ---
 
 ## 🧰 Requisitos y tips
