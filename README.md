@@ -15,7 +15,7 @@ Aplicación web para votación online con panel de administración.
 
 /backend (Express)
 
-README.md
+ ReadMe.md
 ---
 
 ## 🧰 Requisitos y tips
